@@ -1,0 +1,31 @@
+{
+    "$schema": "https://json.schemastore.org/claude-code-settings.json",
+    "env": {
+        "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+        "ANTHROPIC_AUTH_TOKEN": "{your-api-key}",
+        "ANTHROPIC_BASE_URL": "https://api2.ai.dev.nhk.jp",
+        "ANTHROPIC_MODEL": "claude-opus-4-6-adaptive-thinking",
+        "SEARCH_MODEL": "gemini-3-flash-preview"
+    },
+    "preferences": {
+        "tmuxSplitPanes": true
+    },
+    "hooks": {
+        "PreToolUse": [
+            {
+                "matcher": "WebSearch",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "~/.claude/hooks/override_websearch.sh",
+                        "timeout": 10
+                    }
+                ]
+            }
+        ]
+    },
+    "permissions": {
+        "allow": ["WebSearch"],
+        "defaultMode": "dontAsk"
+    }
+}

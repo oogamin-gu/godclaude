@@ -2,14 +2,12 @@
     "$schema": "https://json.schemastore.org/claude-code-settings.json",
     "env": {
         "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-        "ANTHROPIC_AUTH_TOKEN": "{your-api-key}",
         "ANTHROPIC_BASE_URL": "https://api2.ai.dev.nhk.jp",
         "ANTHROPIC_MODEL": "claude-opus-4-6-adaptive-thinking",
         "SEARCH_MODEL": "gemini-3-flash-preview"
     },
-    "preferences": {
-        "tmuxSplitPanes": true
-    },
+    "apiKeyHelper": "~/.claude/api-key-helper.sh",
+    "teammateMode": "auto",
     "hooks": {
         "PreToolUse": [
             {
@@ -18,14 +16,48 @@
                     {
                         "type": "command",
                         "command": "~/.claude/hooks/override_websearch.sh",
-                        "timeout": 10
+                        "timeout": 20
                     }
                 ]
             }
         ]
     },
     "permissions": {
-        "allow": ["WebSearch"],
-        "defaultMode": "dontAsk"
+        "allow": [
+            "Read(**)",
+            "Edit(**)",
+            "Glob(**)",
+            "Grep(**)",
+            "LS(**)",
+            "WebSearch",
+            "Bash(npm *)",
+            "Bash(pnpm *)",
+            "Bash(yarn *)",
+            "Bash(node *)",
+            "Bash(bun *)",
+            "Bash(git *)",
+            "Bash(tsc *)",
+            "Bash(vite *)",
+            "Bash(next *)",
+            "Bash(eslint *)",
+            "Bash(prettier *)",
+            "Bash(tailwind *)"
+        ],
+        "deny": [
+            "Read(**/.env*)",
+            "Read(**/.env.**)",
+            "Read(**/secrets/**)",
+            "Read(**/*.key)",
+            "Read(**/*.pem)",
+            "Read(**/*.crt)",
+            "Bash(rm -rf *)",
+            "Bash(rm -r *)",
+            "Bash(sudo *)",
+            "Bash(chmod 777 *)",
+            "Bash(curl *)",
+            "Bash(wget *)",
+            "Bash(ssh *)"
+        ],
+        "defaultMode": "acceptEdits"
     }
 }

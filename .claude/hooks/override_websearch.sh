@@ -9,9 +9,7 @@ if [[ "$TOOL_NAME" == "WebSearch" && -n "$QUERY" ]]; then
 
 Gemini + Google Search grounding を使うには、以下のコマンドを実行してください：
 
-python3 ~/.claude/hooks/search_with_gemini.py --cite \"$QUERY\"
-
-（--debug をつけると詳細レスポンスも表示されます）"
+python3 ~/.claude/hooks/search_with_gemini.py \"$QUERY\""
     
     jq -n --arg reason "$REASON" '{
       hookSpecificOutput: {

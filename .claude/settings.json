@@ -41,7 +41,8 @@
             "Bash(next *)",
             "Bash(eslint *)",
             "Bash(prettier *)",
-            "Bash(tailwind *)"
+            "Bash(tailwind *)",
+            "Bash(python3 ~/.claude/hooks/*.py *)"
         ],
         "deny": [
             "Read(**/.env*)",

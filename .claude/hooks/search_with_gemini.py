@@ -9,15 +9,21 @@ if len(sys.argv) < 2:
 
 query = sys.argv[1]
 
-# Claude Code の settings.json "env" から取得（ANTHROPIC_変数をフォールバック）
-api_key = os.getenv("API_KEY") or os.getenv("ANTHROPIC_AUTH_TOKEN")
+# Claude Code の settings.json "env" から取得（api-key-helper.sh と同じ優先順位でフォールバック）
+api_key = (
+    os.getenv("LITELLM_API_KEY")
+    or os.getenv("LITELLM_ANTHROPIC_TOKEN")
+    or os.getenv("ANTHROPIC_API_KEY")
+    or os.getenv("ANTHROPIC_AUTH_TOKEN")
+)
 base_url = os.getenv("BASE_URL") or os.getenv("ANTHROPIC_BASE_URL")
 search_model = os.getenv("SEARCH_MODEL")
 
 if not api_key or not base_url or not search_model:
     print(
-        "エラー: ~/.claude/settings.json の \"env\" セクションに\n"
-        "ANTHROPIC_AUTH_TOKEN / ANTHROPIC_BASE_URL / SEARCH_MODEL を設定してください。",
+        "エラー: API キーが見つかりません。\n"
+        "~/.bashrc 等で LITELLM_API_KEY を export するか、\n"
+        "~/.claude/settings.json の \"env\" に API_KEY / ANTHROPIC_BASE_URL / SEARCH_MODEL を設定してください。",
         file=sys.stderr,
     )
     sys.exit(1)

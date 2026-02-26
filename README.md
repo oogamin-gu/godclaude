@@ -7,7 +7,7 @@ Claude Code の個人設定ファイルを管理するリポジトリです。
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) がインストール済み
 - Python 3 + `openai` パッケージ（Gemini 検索フック用）
 - `jq` コマンド（フックスクリプト内で使用）
-- 環境変数 `ANTHROPIC_AUTH_TOKEN` または `ANTHROPIC_API_KEY` が設定済み
+- 環境変数 `LITELLM_API_KEY`（推奨）または `ANTHROPIC_API_KEY` 等が設定済み
 
 ## セットアップ手順
 
@@ -42,8 +42,10 @@ pip install openai
 `~/.bashrc` または `~/.zshrc` に以下を追記してください。
 
 ```bash
-# Anthropic API キー（LiteLLM Proxy 等のトークン）
-export ANTHROPIC_AUTH_TOKEN="sk-XXXXXXXXXXXXXXXX"
+# LiteLLM Proxy 用 API キー（推奨）
+export LITELLM_API_KEY="sk-XXXXXXXXXXXXXXXX"
+# または Anthropic API キーを直接指定
+# export ANTHROPIC_API_KEY="sk-ant-XXXXXXXXXXXXXXXX"
 ```
 
 設定を反映します。
@@ -89,9 +91,10 @@ Claude Code の中心となる設定ファイルです。
 
 環境変数から API キーを取得するヘルパースクリプトです。以下の優先順位で検索します。
 
-1. `ANTHROPIC_API_KEY`
-2. `ANTHROPIC_AUTH_TOKEN`
-3. `LITELLM_ANTHROPIC_TOKEN`
+1. `LITELLM_API_KEY`（最優先）
+2. `LITELLM_ANTHROPIC_TOKEN`
+3. `ANTHROPIC_API_KEY`
+4. `ANTHROPIC_AUTH_TOKEN`
 
 ### `hooks/override_websearch.sh`
 
